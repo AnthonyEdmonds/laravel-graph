@@ -2,6 +2,8 @@
 
 namespace AnthonyEdmonds\LaravelGraph\Providers;
 
+use AnthonyEdmonds\LaravelGraph\Charts\LineChart;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelGraphServiceProvider extends ServiceProvider
@@ -14,7 +16,7 @@ class LaravelGraphServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->bootPublishes();
-        $this->bootViews();
+        $this->bootComponents();
     }
 
     protected function bootPublishes(): void
@@ -24,11 +26,8 @@ class LaravelGraphServiceProvider extends ServiceProvider
         ], 'laravel-graph');
     }
 
-    protected function bootViews(): void
+    protected function bootComponents(): void
     {
-        $this->loadViewsFrom(
-            __DIR__.'/resources',
-            'laravel-graph'
-        );
+        Blade::component('line-chart', LineChart::class);
     }
 }
