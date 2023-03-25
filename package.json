@@ -1,0 +1,22 @@
+{
+    "name": "laravel-graph",
+    "description": "Generate accessible SVG graphs for Laravel Blades",
+    "keywords": [
+        "laravel",
+        "graph",
+        "svg",
+        "blade component"
+    ],
+    "author": "Anthony Edmonds",
+    "license": "MIT",
+    "homepage": "https://github.com/AnthonyEdmonds/laravel-graph",
+    "scripts": {
+        "test": "php vendor/bin/phpunit",
+        "pint": "php vendor/bin/pint",
+        "php-stan": "php vendor/bin/phpstan analyse -c phpstan.neon",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        "husky": "^8"
+    }
+}

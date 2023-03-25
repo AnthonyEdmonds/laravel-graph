@@ -1,0 +1,49 @@
+{
+    "name": "anthonyedmonds/laravel-graph",
+    "description": "Generate accessible SVG graphs for Laravel Blades",
+    "keywords": ["laravel", "graph", "svg", "blade component"],
+    "type": "library",
+    "homepage": "https://github.com/AnthonyEdmonds/laravel-graph",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anthony Edmonds",
+            "email": "contact@anthonyedmonds.me",
+            "homepage": "https://anthonyedmonds.me",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^10",
+        "nunomaduro/laravel-mojito": "^0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1",
+        "orchestra/testbench": "^8",
+        "phpstan/phpstan": "^1",
+        "phpunit/phpunit": "^10"
+    },
+    "autoload": {
+        "psr-4": {
+            "AnthonyEdmonds\\LaravelGraph\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AnthonyEdmonds\\LaravelGraph\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AnthonyEdmonds\\LaravelGraph\\Providers\\LaravelGraphServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
