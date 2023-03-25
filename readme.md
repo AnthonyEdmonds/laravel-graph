@@ -3,7 +3,6 @@
 ## Roadmap
 
 * Backfill tests
-* Put on packagist
 * Copy working notes from scratch
 * Docs
 * Test page
