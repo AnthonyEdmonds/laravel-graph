@@ -1,8 +1,8 @@
 <?php
 
-namespace App\View\Components\Charts\Enums;
+namespace AnthonyEdmonds\LaravelGraph\Enums;
 
-enum Point: string
+enum PointType: string
 {
     case Circle = 'circle';
 

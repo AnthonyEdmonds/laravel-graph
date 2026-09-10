@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Charts\Series;
+namespace AnthonyEdmonds\LaravelGraph\Series;
 
-use App\View\Components\Charts\Chart;
-use App\View\Components\Charts\Enums\Colour;
-use App\View\Components\Charts\Enums\Point;
+use AnthonyEdmonds\LaravelGraph\Charts\Chart;
+use AnthonyEdmonds\LaravelGraph\Enums\Colour;
+use AnthonyEdmonds\LaravelGraph\Enums\PointType;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 
@@ -39,7 +39,7 @@ class Series
         Collection $data,
         public Colour $lineColour = Colour::BlackPrimary,
         public Colour $pointColour = Colour::BlackPrimary,
-        public Point $pointShape = Point::Circle,
+        public PointType $pointShape = PointType::Circle,
         public Colour $textColour = Colour::BlackPrimary,
     ) {
         $this->points = $data
@@ -79,7 +79,7 @@ class Series
         return $this;
     }
 
-    public function setPointShape(Point $shape): self
+    public function setPointShape(PointType $shape): self
     {
         $this->pointShape = $shape;
 
@@ -181,8 +181,8 @@ class Series
             : $this->chart->verticalAxis->positionFor($subject);
 
         return match ($this->pointShape) {
-            Point::Square => $position - $this->pointSize,
-            Point::Text => $axis === 'y' ? $position - Chart::CHARACTER_HEIGHT / 4 : $position,
+            PointType::Square => $position - $this->pointSize,
+            PointType::Text => $axis === 'y' ? $position - Chart::CHARACTER_HEIGHT / 4 : $position,
             default => $position,
         };
     }

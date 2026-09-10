@@ -1,8 +1,8 @@
 <?php
 
-namespace App\View\Components\Charts\Axes;
+namespace AnthonyEdmonds\LaravelGraph\Axes;
 
-use App\View\Components\Charts\Chart;
+use AnthonyEdmonds\LaravelGraph\Charts\Chart;
 
 class HorizontalAxis extends Axis
 {
@@ -60,9 +60,9 @@ class HorizontalAxis extends Axis
         return $labels;
     }
 
-    public function positionFor(int $point): int
+    public function positionFor(int $index): int
     {
-        return $point * $this->spacing + $this->spacing / 2;
+        return ($index * $this->spacing) + ($this->spacing / 2);
     }
 
     public function preRender(): void

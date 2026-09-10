@@ -1,8 +1,8 @@
 <?php
 
-namespace App\View\Components\Charts\Axes;
+namespace AnthonyEdmonds\LaravelGraph\Axes;
 
-use App\View\Components\Charts\Chart;
+use AnthonyEdmonds\LaravelGraph\Charts\Chart;
 use Illuminate\Contracts\View\View;
 
 abstract class Axis
@@ -37,7 +37,7 @@ abstract class Axis
 
     abstract public function getLabels(): array;
 
-    abstract public function positionFor(int $point): int;
+    abstract public function positionFor(int $index): int;
 
     abstract public function preRender(): void;
 
@@ -52,6 +52,6 @@ abstract class Axis
     {
         $this->preRender();
 
-        return view('components.charts.axes.'.$this->axisType())->with('axis', $this);
+        return view('laravel-graph::axes.'.$this->axisType())->with('axis', $this);
     }
 }

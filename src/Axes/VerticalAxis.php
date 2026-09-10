@@ -1,8 +1,8 @@
 <?php
 
-namespace App\View\Components\Charts\Axes;
+namespace AnthonyEdmonds\LaravelGraph\Axes;
 
-use App\View\Components\Charts\Chart;
+use AnthonyEdmonds\LaravelGraph\Charts\Chart;
 
 class VerticalAxis extends Axis
 {
@@ -64,10 +64,10 @@ class VerticalAxis extends Axis
         return $labels;
     }
 
-    public function positionFor(int $point): int
+    public function positionFor(int $index): int
     {
         $verticalSpacing = $this->height / $this->range;
-        $difference = $this->max - $point;
+        $difference = $this->max - $index;
 
         return $verticalSpacing * $difference;
     }

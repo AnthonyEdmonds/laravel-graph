@@ -1,4 +1,4 @@
-@use(App\View\Components\Charts\Chart)
+@use(AnthonyEdmonds\LaravelGraph\Charts\Chart)
 
 <g
     class="legend"

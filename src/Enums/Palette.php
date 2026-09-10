@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Charts\Enums;
+namespace AnthonyEdmonds\LaravelGraph\Enums;
 
 enum Palette: string
 {

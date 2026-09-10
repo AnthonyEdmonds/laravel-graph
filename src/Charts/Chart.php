@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Charts;
+namespace AnthonyEdmonds\LaravelGraph\Charts;
 
-use App\View\Components\Charts\Axes\HorizontalAxis;
-use App\View\Components\Charts\Axes\VerticalAxis;
-use App\View\Components\Charts\Enums\Palette;
-use App\View\Components\Charts\Legend\Legend;
-use App\View\Components\Charts\Series\Series;
+use AnthonyEdmonds\LaravelGraph\Axes\HorizontalAxis;
+use AnthonyEdmonds\LaravelGraph\Axes\VerticalAxis;
+use AnthonyEdmonds\LaravelGraph\Enums\Palette;
+use AnthonyEdmonds\LaravelGraph\Legend\Legend;
+use AnthonyEdmonds\LaravelGraph\Series\Series;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;

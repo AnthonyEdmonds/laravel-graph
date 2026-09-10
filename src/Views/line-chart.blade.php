@@ -1,4 +1,4 @@
-@use(App\View\Components\Charts\Enums\Colour)
+@use(AnthonyEdmonds\LaravelGraph\Enums\Colour)
 
 <figure style="margin-bottom: 10px; margin-left: 0; margin-right: 0;">
     <svg

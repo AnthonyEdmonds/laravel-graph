@@ -1,8 +1,8 @@
 <?php
 
-namespace App\View\Components\Charts\Legend;
+namespace AnthonyEdmonds\LaravelGraph\Legend;
 
-use App\View\Components\Charts\Chart;
+use AnthonyEdmonds\LaravelGraph\Charts\Chart;
 use Illuminate\Contracts\View\View;
 
 class Legend

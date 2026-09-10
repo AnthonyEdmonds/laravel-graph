@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Charts;
+namespace AnthonyEdmonds\LaravelGraph\Charts;
 
 class LineChart extends Chart
 {

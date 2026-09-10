@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f3721ba4f7f7b67fbd56086860693cb",
+    "content-hash": "c55360fb6c8f890389744e09300cd6ec",
     "packages": [
         {
             "name": "brick/math",
@@ -6147,6 +6147,65 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "anthonyedmonds/laravel-testing-traits",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AnthonyEdmonds/laravel-testing-traits.git",
+                "reference": "5fc5ebd9af750320f98434ef29b64e858d32b44c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-testing-traits/zipball/5fc5ebd9af750320f98434ef29b64e858d32b44c",
+                "reference": "5fc5ebd9af750320f98434ef29b64e858d32b44c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^13",
+                "orchestra/testbench": "^11",
+                "php": "^8.3",
+                "phpunit/phpunit": "^12"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AnthonyEdmonds\\LaravelTestingTraits\\TestingTraitsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AnthonyEdmonds\\LaravelTestingTraits\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Edmonds",
+                    "email": "contact@anthonyedmonds.me",
+                    "homepage": "https://anthonyedmonds.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Make testing easier with this collection of testing traits! ",
+            "homepage": "https://github.com/AnthonyEdmonds/laravel-testing-traits",
+            "keywords": [
+                "laravel",
+                "phpunit",
+                "testing",
+                "traits"
+            ],
+            "support": {
+                "issues": "https://github.com/AnthonyEdmonds/laravel-testing-traits/issues",
+                "source": "https://github.com/AnthonyEdmonds/laravel-testing-traits/tree/1.4.1"
+            },
+            "time": "2026-08-13T08:30:33+00:00"
+        },
         {
             "name": "composer/semver",
             "version": "3.4.4",
