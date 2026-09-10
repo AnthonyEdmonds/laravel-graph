@@ -45,7 +45,7 @@ class VerticalAxis extends Axis
         $this->width
             = Axis::CAPTION_SIZE
             + Chart::GAP
-            + (strlen($this->max . $this->unit) * (Chart::CHARACTER_WIDTH + 1))
+            + (strlen($this->max.$this->unit) * (Chart::CHARACTER_WIDTH + 1))
             + Chart::GAP;
     }
 
@@ -56,10 +56,10 @@ class VerticalAxis extends Axis
         $gap = floor(($this->max - $this->min) / $maxSteps);
 
         for ($label = $this->max; $label >= $this->min; $label -= $gap) {
-            $labels[] = $label . $this->unit;
+            $labels[] = $label.$this->unit;
         }
 
-        array_splice($labels, -1, 1, $this->min . $this->unit);
+        array_splice($labels, -1, 1, $this->min.$this->unit);
 
         return $labels;
     }

@@ -52,6 +52,6 @@ abstract class Axis
     {
         $this->preRender();
 
-        return view('components.charts.axes.' . $this->axisType())->with('axis', $this);
+        return view('components.charts.axes.'.$this->axisType())->with('axis', $this);
     }
 }

@@ -50,7 +50,7 @@ class HorizontalAxis extends Axis
                 ? $label
                 : '';
 
-            ++$current;
+            $current++;
 
             if ($current > $gap) {
                 $current = 0;

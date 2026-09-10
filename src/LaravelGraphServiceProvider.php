@@ -22,7 +22,7 @@ class LaravelGraphServiceProvider extends ServiceProvider
     protected function bootPublishes(): void
     {
         $this->publishes([
-            __DIR__ . '/Views' => resource_path('views/vendor/laravel-graph'),
+            __DIR__.'/Views' => resource_path('views/vendor/laravel-graph'),
         ], 'laravel-graph');
     }
 
@@ -34,7 +34,7 @@ class LaravelGraphServiceProvider extends ServiceProvider
     protected function bootViews(): void
     {
         $this->loadViewsFrom(
-            __DIR__ . '/Views',
+            __DIR__.'/Views',
             'laravel-graph',
         );
     }

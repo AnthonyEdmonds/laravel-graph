@@ -52,7 +52,7 @@ abstract class Chart extends Component
         ?int $verticalAxisMin = null,
         string|Palette $palette = Palette::Default,
     ) {
-        $this->id = $id ?? uniqid($this->chartType() . '_');
+        $this->id = $id ?? uniqid($this->chartType().'_');
 
         if (is_string($palette) === true) {
             $palette = Palette::from($palette);
@@ -84,13 +84,14 @@ abstract class Chart extends Component
     // Component
     public function render(): View
     {
-        return view('components.charts.' . $this->chartType());
+        return view('components.charts.'.$this->chartType());
     }
 
     // Setters
     public function setPalette(Palette $palette): self
     {
         $this->palette = Palette::get($palette);
+
         return $this;
     }
 
