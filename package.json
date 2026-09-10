@@ -12,7 +12,7 @@
     "homepage": "https://github.com/AnthonyEdmonds/laravel-graph",
     "scripts": {
         "test": "php vendor/bin/phpunit",
-        "pint": "php vendor/bin/pint",
+        "pint": "php vendor/bin/pint --preset psr12",
         "php-stan": "php vendor/bin/phpstan analyse -c phpstan.neon",
         "prepare": "husky install"
     },

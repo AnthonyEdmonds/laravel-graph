@@ -16,7 +16,7 @@ class GetLabelsTest extends TestCase
         $this->axis = $this->makeChart()->horizontalAxis;
     }
 
-    public function test_when_wide(): void
+    public function testWhenWide(): void
     {
         $this->axis->width = 600;
 
@@ -32,7 +32,7 @@ class GetLabelsTest extends TestCase
         );
     }
 
-    public function test_when_narrow(): void
+    public function testWhenNarrow(): void
     {
         $this->axis->width = 200;
 

@@ -7,7 +7,7 @@ use AnthonyEdmonds\LaravelGraph\Tests\TestCase;
 
 class GetTest extends TestCase
 {
-    public function testDefault(): void
+    public function test(): void
     {
         $this->assertEquals(
             Palette::default(),

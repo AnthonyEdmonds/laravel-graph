@@ -8,7 +8,7 @@ use AnthonyEdmonds\LaravelGraph\Tests\TestCase;
 
 class GreyscaleTest extends TestCase
 {
-    public function testDefault(): void
+    public function test(): void
     {
         $this->assertEquals(
             [

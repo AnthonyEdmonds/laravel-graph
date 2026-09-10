@@ -42,8 +42,7 @@ class VerticalAxis extends Axis
 
     public function calculateWidth(): void
     {
-        $this->width
-            = Axis::CAPTION_SIZE
+        $this->width = Axis::CAPTION_SIZE
             + Chart::GAP
             + (strlen($this->max.$this->unit) * (Chart::CHARACTER_WIDTH + 1))
             + Chart::GAP;
