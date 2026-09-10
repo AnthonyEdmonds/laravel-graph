@@ -1,23 +1,21 @@
 <?php
 
-namespace AnthonyEdmonds\LaravelGraph\Axes;
+namespace App\View\Components\Charts\Axes;
 
-use AnthonyEdmonds\LaravelGraph\Charts\Chart;
+use App\View\Components\Charts\Chart;
 use Illuminate\Contracts\View\View;
 
 abstract class Axis
 {
-    const CAPTION_SIZE = 22;
+    public const int CAPTION_SIZE = 22;
 
-    public string $caption;
+    public array $allLabels = [];
 
-    public Chart $chart;
+    public int $height = 0;
 
-    public int $height;
+    public string $key = '';
 
-    public string $key;
-
-    public array $labels;
+    public array $labels = [];
 
     public int $paddingBottom = 0;
 
@@ -27,9 +25,9 @@ abstract class Axis
 
     public int $paddingTop = 0;
 
-    public int $spacing;
+    public int $spacing = 0;
 
-    public int $width;
+    public int $width = 0;
 
     abstract public function axisType(): string;
 
@@ -43,16 +41,17 @@ abstract class Axis
 
     abstract public function preRender(): void;
 
-    public function __construct(Chart $chart, string $caption)
-    {
-        $this->chart = $chart;
-        $this->caption = $caption;
+    public function __construct(
+        public Chart $chart,
+        public string $caption,
+    ) {
+        //
     }
 
     public function render(): View
     {
         $this->preRender();
 
-        return view('components.charts.axes.'.$this->axisType())->with('axis', $this);
+        return view('components.charts.axes.' . $this->axisType())->with('axis', $this);
     }
 }

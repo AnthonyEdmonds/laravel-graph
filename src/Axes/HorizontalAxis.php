@@ -1,17 +1,16 @@
 <?php
 
-namespace AnthonyEdmonds\LaravelGraph\Axes;
+namespace App\View\Components\Charts\Axes;
 
-use AnthonyEdmonds\LaravelGraph\Charts\Chart;
+use App\View\Components\Charts\Chart;
 
 class HorizontalAxis extends Axis
 {
-    public string $key;
-
-    public function __construct(Chart $chart, string $caption, string $key)
-    {
-        $this->key = $key;
-
+    public function __construct(
+        public Chart $chart,
+        public string $caption,
+        public string $key,
+    ) {
         parent::__construct($chart, $caption);
 
         $this->calculateHeight();
@@ -25,7 +24,7 @@ class HorizontalAxis extends Axis
 
     public function calculateHeight(): void
     {
-        $this->height = Chart::GAP + Axis::CAPTION_SIZE + Chart::GAP + Chart::CHARACTER_HEIGHT;
+        $this->height = Chart::GAP + Axis::CAPTION_SIZE + Chart::GAP + Chart::CHARACTER_HEIGHT + Chart::GAP;
     }
 
     public function calculateWidth(): void
@@ -35,7 +34,30 @@ class HorizontalAxis extends Axis
 
     public function getLabels(): array
     {
-        return $this->chart->data->pluck($this->key)->toArray();
+        $this->allLabels = $this->chart->data->pluck($this->key)->toArray();
+
+        $longestLabel = max($this->allLabels);
+        $characters = strlen($longestLabel) + 1;
+        $labelWidth = $characters * Chart::CHARACTER_WIDTH;
+        $maxLabels = floor($this->width / $labelWidth);
+        $gap = floor(count($this->allLabels) / $maxLabels);
+
+        $labels = [];
+        $current = 0;
+
+        foreach ($this->allLabels as $label) {
+            $labels[] = $current === 0
+                ? $label
+                : '';
+
+            ++$current;
+
+            if ($current > $gap) {
+                $current = 0;
+            }
+        }
+
+        return $labels;
     }
 
     public function positionFor(int $point): int
@@ -45,10 +67,10 @@ class HorizontalAxis extends Axis
 
     public function preRender(): void
     {
-        $this->labels = $this->getLabels();
-
         $this->paddingLeft = $this->chart->verticalAxis->width;
+        $this->paddingRight = $this->chart->legend->width;
         $this->calculateWidth();
+        $this->labels = $this->getLabels();
         $this->spacing = $this->width / count($this->labels);
     }
 }

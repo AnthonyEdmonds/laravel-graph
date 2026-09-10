@@ -1,38 +1,25 @@
 <?php
 
-namespace AnthonyEdmonds\LaravelGraph\Axes;
+namespace App\View\Components\Charts\Axes;
 
-use AnthonyEdmonds\LaravelGraph\Charts\Chart;
+use App\View\Components\Charts\Chart;
 
 class VerticalAxis extends Axis
 {
-    public array $keys;
+    public array $labels = [];
 
-    public array $labels;
+    public int $range = 0;
 
-    public int|null $max = null;
-
-    public int|null $min = null;
-
-    public int $range;
-
-    public int $spacing;
-
-    public string|null $unit = null;
+    public int $spacing = 0;
 
     public function __construct(
-        Chart $chart,
-        string $caption,
-        array $keys,
-        string $unit = null,
-        int|null $max = null,
-        int|null $min = null,
+        public Chart $chart,
+        public string $caption,
+        public array $keys,
+        public ?string $unit = null,
+        public ?int $max = null,
+        public ?int $min = null,
     ) {
-        $this->keys = $keys;
-        $this->max = $max;
-        $this->min = $min;
-        $this->unit = $unit;
-
         parent::__construct($chart, $caption);
 
         $this->getAxisRange();
@@ -48,33 +35,31 @@ class VerticalAxis extends Axis
 
     public function calculateHeight(): void
     {
-        $this->height =
-            $this->chart->height - $this->paddingTop - $this->chart->horizontalAxis->height;
+        $this->height = $this->chart->height
+            - $this->paddingTop
+            - $this->chart->horizontalAxis->height;
     }
 
     public function calculateWidth(): void
     {
-        $this->width =
-            Axis::CAPTION_SIZE +
-            Chart::GAP +
-            strlen($this->max.$this->unit) * Chart::CHARACTER_WIDTH +
-            Chart::GAP;
+        $this->width
+            = Axis::CAPTION_SIZE
+            + Chart::GAP
+            + (strlen($this->max . $this->unit) * (Chart::CHARACTER_WIDTH + 1))
+            + Chart::GAP;
     }
 
     public function getLabels(): array
     {
         $labels = [];
-        $maxSteps = floor($this->height / Chart::CHARACTER_HEIGHT);
-
-        for ($gap = $maxSteps; $gap < $this->range; $gap++) {
-            if ($this->range % $gap === 0) {
-                break;
-            }
-        }
+        $maxSteps = floor($this->height / (Chart::CHARACTER_HEIGHT + Chart::GAP));
+        $gap = floor(($this->max - $this->min) / $maxSteps);
 
         for ($label = $this->max; $label >= $this->min; $label -= $gap) {
-            $labels[] = $label.$this->unit;
+            $labels[] = $label . $this->unit;
         }
+
+        array_splice($labels, -1, 1, $this->min . $this->unit);
 
         return $labels;
     }
@@ -91,6 +76,7 @@ class VerticalAxis extends Axis
     {
         $this->calculateHeight();
         $this->labels = $this->getLabels();
+        $this->allLabels = $this->labels;
         $this->spacing = $this->height / (count($this->labels) - 1);
     }
 

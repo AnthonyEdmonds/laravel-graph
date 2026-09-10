@@ -1,41 +1,24 @@
 <?php
 
-namespace AnthonyEdmonds\LaravelGraph\Series;
+namespace App\View\Components\Charts\Series;
 
-use AnthonyEdmonds\LaravelGraph\Charts\Chart;
-use AnthonyEdmonds\LaravelGraph\Colours\GovukColours;
+use App\View\Components\Charts\Chart;
+use App\View\Components\Charts\Enums\Colour;
+use App\View\Components\Charts\Enums\Point;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 
 class Series
 {
-    const CIRCLE = 'circle';
-
-    const RECTANGLE = 'rect';
-
-    const TEXT = 'text';
-
-    const POINT_SHAPES = [self::CIRCLE, self::RECTANGLE];
-
-    public Chart $chart;
-
-    public int $height;
-
-    public string $label;
-
-    public string $lineColour;
+    public int $height = 0;
 
     public int $paddingLeft = 0;
 
     public int $paddingTop = 0;
 
-    public string $pointColour = GovukColours::BLACK;
-
-    public string $pointShape = self::CIRCLE;
-
     public int $pointSize = 3;
 
-    public array $points;
+    public array $points = [];
 
     public bool $showLine = true;
 
@@ -45,23 +28,20 @@ class Series
 
     public string $strokeWidth = '3px';
 
-    public string $textColour = GovukColours::BLACK;
+    public string $unit = '';
 
-    public string $unit;
-
-    public int $width;
+    public int $width = 0;
 
     public function __construct(
-        Chart $chart,
-        string $label,
+        public Chart $chart,
+        public string $label,
         string $seriesKey,
         Collection $data,
-        string $lineColour,
+        public Colour $lineColour = Colour::BlackPrimary,
+        public Colour $pointColour = Colour::BlackPrimary,
+        public Point $pointShape = Point::Circle,
+        public Colour $textColour = Colour::BlackPrimary,
     ) {
-        $this->chart = $chart;
-        $this->label = $label;
-        $this->lineColour = $lineColour;
-
         $this->points = $data
             ->pluck($seriesKey)
             ->whereNotNull()
@@ -85,91 +65,75 @@ class Series
     }
 
     // Setters
-    public function setLineColour(string $lineColour): self
+    public function setLineColour(Colour $lineColour): self
     {
         $this->lineColour = $lineColour;
-
         return $this;
     }
 
-    public function setPointColour(string $pointColour): self
+    public function setPointColour(Colour $pointColour): self
     {
         $this->pointColour = $pointColour;
-
         return $this;
     }
 
-    public function setPointShape(string $shape): self
+    public function setPointShape(Point $shape): self
     {
-        if (in_array($shape, self::POINT_SHAPES) === false) {
-            throw new \InvalidArgumentException("$shape is not a valid point shape");
-        }
-
         $this->pointShape = $shape;
-
         return $this;
     }
 
     public function setPointSize(int $size): self
     {
         $this->pointSize = $size;
-
         return $this;
     }
 
-    public function setTextColour(string $textColour): self
+    public function setTextColour(Colour $textColour): self
     {
         $this->textColour = $textColour;
-
         return $this;
     }
 
     public function setStrokeWidth(string $strokeWidth): self
     {
         $this->strokeWidth = $strokeWidth;
-
         return $this;
     }
 
     public function hideLine(): self
     {
         $this->showLine = false;
-
         return $this;
     }
 
     public function hidePoint(): self
     {
         $this->showPoint = false;
-
         return $this;
     }
 
     public function hideText(): self
     {
         $this->showText = false;
-
         return $this;
     }
 
     public function showLine(): self
     {
         $this->showLine = true;
-
         return $this;
     }
 
     public function showPoint(): self
     {
         $this->showPoint = true;
-
         return $this;
     }
 
     public function showText(): self
     {
         $this->showText = true;
-
         return $this;
     }
 
@@ -198,17 +162,23 @@ class Series
         return implode(' ', $points);
     }
 
-    public function positionFor(int|string $subject, string $axis, string $shape = null): int
+    public function positionFor(int|string $subject, string $axis): int
     {
-        $position =
-            $axis === 'x'
-                ? $this->chart->horizontalAxis->positionFor($subject)
-                : $this->chart->verticalAxis->positionFor($subject);
+        $position = $axis === 'x'
+            ? $this->chart->horizontalAxis->positionFor($subject)
+            : $this->chart->verticalAxis->positionFor($subject);
 
-        return match ($shape) {
-            self::RECTANGLE => $position - $this->pointSize,
-            self::TEXT => $axis === 'y' ? $position - Chart::CHARACTER_HEIGHT / 4 : $position,
+        return match ($this->pointShape) {
+            Point::Square => $position - $this->pointSize,
+            Point::Text => $axis === 'y' ? $position - Chart::CHARACTER_HEIGHT / 4 : $position,
             default => $position,
         };
+    }
+
+    public function descriptionFor(int|string $key, int|string $value): string
+    {
+        $axisValue = $this->chart->horizontalAxis->labels[$key];
+
+        return "$axisValue: $this->label, $value$this->unit";
     }
 }

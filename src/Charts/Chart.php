@@ -1,11 +1,12 @@
 <?php
 
-namespace AnthonyEdmonds\LaravelGraph\Charts;
+namespace App\View\Components\Charts;
 
-use AnthonyEdmonds\LaravelGraph\Axes\HorizontalAxis;
-use AnthonyEdmonds\LaravelGraph\Axes\VerticalAxis;
-use AnthonyEdmonds\LaravelGraph\Palettes\GovukPalettes;
-use AnthonyEdmonds\LaravelGraph\Series\Series;
+use App\View\Components\Charts\Axes\HorizontalAxis;
+use App\View\Components\Charts\Axes\VerticalAxis;
+use App\View\Components\Charts\Enums\Palette;
+use App\View\Components\Charts\Legend\Legend;
+use App\View\Components\Charts\Series\Series;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -13,27 +14,19 @@ use Illuminate\View\Component;
 
 abstract class Chart extends Component
 {
-    const CAPTION_SIZE = 28;
+    public const int CAPTION_SIZE = 28;
 
-    const CHARACTER_HEIGHT = 16;
+    public const int CHARACTER_HEIGHT = 16;
 
-    const CHARACTER_WIDTH = 10;
+    public const int CHARACTER_WIDTH = 10;
 
-    const GAP = 8;
-
-    public string $caption;
-
-    public Chart $chart;
-
-    public Collection $data;
-
-    public string $description;
-
-    public int $height;
+    public const int GAP = 8;
 
     public HorizontalAxis $horizontalAxis;
 
     public string $id;
+
+    public Legend $legend;
 
     public array $palette;
 
@@ -41,36 +34,36 @@ abstract class Chart extends Component
 
     public VerticalAxis $verticalAxis;
 
-    public int $width;
-
     abstract public function chartType(): string;
 
     public function __construct(
-        string $caption,
-        string $description,
-        Collection $data,
+        public string $caption,
+        public string $description,
+        public Collection $data,
         string $horizontalAxisKey,
         string $horizontalAxisCaption,
         string $verticalAxisCaption,
-        array $verticalAxisKeys = null,
-        int $width = 630,
-        int $height = 340,
-        string $id = null,
-        string $verticalAxisUnit = null,
-        int $verticalAxisMax = null,
-        int $verticalAxisMin = null,
+        ?array $verticalAxisKeys = null,
+        public int $width = 630,
+        public int $height = 340,
+        ?string $id = null,
+        ?string $verticalAxisUnit = null,
+        ?int $verticalAxisMax = null,
+        ?int $verticalAxisMin = null,
+        string|Palette $palette = Palette::Default,
     ) {
-        $this->caption = $caption;
-        $this->chart = $this;
-        $this->data = $data;
-        $this->description = $description;
-        $this->height = $height;
-        $this->id = $id ?? uniqid($this->chartType().'_');
-        $this->palette = GovukPalettes::default();
-        $this->width = $width;
+        $this->id = $id ?? uniqid($this->chartType() . '_');
+
+        if (is_string($palette) === true) {
+            $palette = Palette::from($palette);
+        }
+
+        $this->palette = Palette::get($palette);
 
         $verticalAxisKeys = $verticalAxisKeys ?? $this->getVerticalAxisKeys($horizontalAxisKey);
         $this->makeSeries($verticalAxisKeys);
+
+        $this->legend = new Legend($this);
 
         $this->horizontalAxis = new HorizontalAxis(
             $this,
@@ -91,14 +84,13 @@ abstract class Chart extends Component
     // Component
     public function render(): View
     {
-        return view('components.charts.'.$this->chartType());
+        return view('components.charts.' . $this->chartType());
     }
 
     // Setters
-    public function setPalette(array $palette): self
+    public function setPalette(Palette $palette): self
     {
-        $this->palette = $palette;
-
+        $this->palette = Palette::get($palette);
         return $this;
     }
 
@@ -130,6 +122,7 @@ abstract class Chart extends Component
                 Str::headline($key),
                 $key,
                 $this->data,
+                $this->palette[$paletteIndex],
                 $this->palette[$paletteIndex],
             );
 
