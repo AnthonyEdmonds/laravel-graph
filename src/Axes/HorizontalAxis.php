@@ -3,6 +3,7 @@
 namespace AnthonyEdmonds\LaravelGraph\Axes;
 
 use AnthonyEdmonds\LaravelGraph\Charts\Chart;
+use DivisionByZeroError;
 
 class HorizontalAxis extends Axis
 {
@@ -35,6 +36,10 @@ class HorizontalAxis extends Axis
     public function getLabels(): array
     {
         $this->allLabels = $this->chart->data->pluck($this->key)->toArray();
+
+        if (empty($this->allLabels) === true) {
+            return [];
+        }
 
         $longestLabel = max($this->allLabels);
         $characters = strlen($longestLabel) + 1;
@@ -71,6 +76,11 @@ class HorizontalAxis extends Axis
         $this->paddingRight = $this->chart->legend->width;
         $this->calculateWidth();
         $this->labels = $this->getLabels();
-        $this->spacing = $this->width / count($this->labels);
+
+        try {
+            $this->spacing = $this->width / count($this->labels);
+        } catch (DivisionByZeroError $exception) {
+            $this->spacing = 1;
+        }
     }
 }

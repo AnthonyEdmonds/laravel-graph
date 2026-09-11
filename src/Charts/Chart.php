@@ -102,7 +102,7 @@ abstract class Chart extends Component
     protected function getVerticalAxisKeys(string $horizontalAxisKey): array
     {
         $keys = [];
-        $point = $this->data->first();
+        $point = $this->data->first() ?? [];
 
         foreach ($point as $key => $value) {
             if ($key === $horizontalAxisKey) {

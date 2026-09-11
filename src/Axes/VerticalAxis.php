@@ -3,6 +3,7 @@
 namespace AnthonyEdmonds\LaravelGraph\Axes;
 
 use AnthonyEdmonds\LaravelGraph\Charts\Chart;
+use DivisionByZeroError;
 
 class VerticalAxis extends Axis
 {
@@ -54,6 +55,10 @@ class VerticalAxis extends Axis
         $maxSteps = floor($this->height / (Chart::CHARACTER_HEIGHT + Chart::GAP));
         $gap = floor(($this->max - $this->min) / $maxSteps);
 
+        if ($gap === 0.0) {
+            $gap = $this->height;
+        }
+
         for ($label = $this->max; $label >= $this->min; $label -= $gap) {
             $labels[] = $label.$this->unit;
         }
@@ -76,7 +81,12 @@ class VerticalAxis extends Axis
         $this->calculateHeight();
         $this->labels = $this->getLabels();
         $this->allLabels = $this->labels;
-        $this->spacing = $this->height / (count($this->labels) - 1);
+
+        try {
+            $this->spacing = $this->height / (count($this->labels) - 1);
+        } catch (DivisionByZeroError $exception) {
+            $this->spacing = 1;
+        }
     }
 
     // Utilities
