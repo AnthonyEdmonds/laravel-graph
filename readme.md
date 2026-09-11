@@ -2,7 +2,6 @@
 
 ![Composer status](.github/composer.svg)
 ![Coverage status](.github/coverage.svg)
-![Frontend version](.github/frontend.svg)
 ![Laravel version](.github/laravel.svg)
 ![NPM status](.github/npm.svg)
 ![PHP version](.github/php.svg)
