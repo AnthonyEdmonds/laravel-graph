@@ -72,7 +72,7 @@
         <text
             aria-hidden="true"
             class="caption"
-            x="{{ $verticalAxis->width + (($width - $verticalAxis->width) / 2) }}"
+            x="{{ $verticalAxis->width + (($width - $verticalAxis->width - $legend->width) / 2) }}"
             y="0"
         >{{ $caption }}</text>
 
