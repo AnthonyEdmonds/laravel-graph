@@ -83,11 +83,17 @@ class VerticalAxis extends Axis
     protected function getAxisRange(): void
     {
         foreach ($this->chart->series as $set) {
-            if (isset($this->max) === false || $set->max() > $this->max) {
+            if (
+                isset($this->max) === false
+                || $set->max() > $this->max
+            ) {
                 $this->max = $set->max();
             }
 
-            if (isset($this->min) === false || $set->min() < $this->min) {
+            if (
+                isset($this->min) === false
+                || $set->min() < $this->min
+            ) {
                 $this->min = $set->min();
             }
         }

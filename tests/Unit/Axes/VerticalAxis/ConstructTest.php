@@ -14,14 +14,33 @@ class ConstructTest extends TestCase
         parent::setUp();
 
         $this->axis = $this->makeChart()->verticalAxis;
-        $this->axis->height = 60;
     }
 
     public function test(): void
     {
         $this->assertEquals(
+            50,
+            $this->axis->max,
+        );
+
+        $this->assertEquals(
+            10,
+            $this->axis->min,
+        );
+
+        $this->assertEquals(
+            40,
+            $this->axis->range,
+        );
+
+        $this->assertEquals(
+            36,
+            $this->axis->paddingTop,
+        );
+
+        $this->assertEquals(
             60,
-            $this->axis->height,
+            $this->axis->width,
         );
     }
 }

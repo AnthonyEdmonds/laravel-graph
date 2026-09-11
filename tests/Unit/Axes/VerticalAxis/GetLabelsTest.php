@@ -23,11 +23,9 @@ class GetLabelsTest extends TestCase
 
         $this->assertEquals(
             [
-                '09:00',
-                '10:00',
-                '11:00',
-                '12:00',
-                '13:00',
+                '50',
+                '30',
+                '10',
             ],
             $this->axis->getLabels(),
         );
