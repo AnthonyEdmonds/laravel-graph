@@ -31,12 +31,20 @@ class Legend
 
     public function calculateWidth(): void
     {
-        $longestLabel = max($this->labels);
+        $longestLabel = 0;
+
+        foreach ($this->labels as $label) {
+            $length = strlen($label);
+
+            if ($length > $longestLabel) {
+                $longestLabel = $length;
+            }
+        }
 
         $this->width = Chart::GAP
             + Chart::CHARACTER_HEIGHT
             + Chart::GAP
-            + (strlen($longestLabel) * Chart::CHARACTER_WIDTH)
+            + ($longestLabel * Chart::CHARACTER_WIDTH)
             + Chart::GAP;
     }
 
