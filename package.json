@@ -11,6 +11,7 @@
     "license": "MIT",
     "homepage": "https://github.com/AnthonyEdmonds/laravel-graph",
     "scripts": {
+        "badges": "php vendor/networkrailbusinesssystems/badges/badges.php",
         "test": "php vendor/bin/phpunit",
         "pint": "php vendor/bin/pint --preset psr12",
         "php-stan": "php vendor/bin/phpstan analyse -c phpstan.neon",

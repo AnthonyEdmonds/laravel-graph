@@ -32,8 +32,8 @@ class Legend
     public function calculateWidth(): void
     {
         $longestLabel = max($this->labels);
-        $this->width
-            = Chart::GAP
+
+        $this->width = Chart::GAP
             + Chart::CHARACTER_HEIGHT
             + Chart::GAP
             + (strlen($longestLabel) * Chart::CHARACTER_WIDTH)
@@ -42,7 +42,7 @@ class Legend
 
     public function render(): View
     {
-        return view('components.charts.legend.legend', [
+        return view('laravel-graph::legend.legend', [
             'legend' => $this,
         ]);
     }

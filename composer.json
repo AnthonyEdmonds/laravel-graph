@@ -21,6 +21,7 @@
     "require-dev": {
         "anthonyedmonds/laravel-testing-traits": "^1",
         "laravel/pint": "^1",
+        "networkrailbusinesssystems/badges": "^1",
         "orchestra/testbench": "^11",
         "phpstan/phpstan": "^2",
         "phpunit/phpunit": "^12"

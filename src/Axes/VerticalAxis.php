@@ -16,7 +16,7 @@ class VerticalAxis extends Axis
         public Chart $chart,
         public string $caption,
         public array $keys,
-        public ?string $unit = null,
+        public string $unit = '',
         public ?int $max = null,
         public ?int $min = null,
     ) {

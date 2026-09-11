@@ -53,100 +53,13 @@ class Series
     {
         $this->paddingLeft = $this->chart->verticalAxis->width;
         $this->paddingTop = $this->chart->verticalAxis->paddingTop;
-
         $this->height = $this->chart->verticalAxis->height;
         $this->width = $this->chart->horizontalAxis->width;
-
         $this->unit = $this->chart->verticalAxis->unit;
 
-        return view('components.charts.series.line', [
+        return view('laravel-graph::series.line', [
             'series' => $this,
         ]);
-    }
-
-    // Setters
-    public function setLineColour(Colour $lineColour): self
-    {
-        $this->lineColour = $lineColour;
-
-        return $this;
-    }
-
-    public function setPointColour(Colour $pointColour): self
-    {
-        $this->pointColour = $pointColour;
-
-        return $this;
-    }
-
-    public function setPointShape(PointType $shape): self
-    {
-        $this->pointShape = $shape;
-
-        return $this;
-    }
-
-    public function setPointSize(int $size): self
-    {
-        $this->pointSize = $size;
-
-        return $this;
-    }
-
-    public function setTextColour(Colour $textColour): self
-    {
-        $this->textColour = $textColour;
-
-        return $this;
-    }
-
-    public function setStrokeWidth(string $strokeWidth): self
-    {
-        $this->strokeWidth = $strokeWidth;
-
-        return $this;
-    }
-
-    public function hideLine(): self
-    {
-        $this->showLine = false;
-
-        return $this;
-    }
-
-    public function hidePoint(): self
-    {
-        $this->showPoint = false;
-
-        return $this;
-    }
-
-    public function hideText(): self
-    {
-        $this->showText = false;
-
-        return $this;
-    }
-
-    public function showLine(): self
-    {
-        $this->showLine = true;
-
-        return $this;
-    }
-
-    public function showPoint(): self
-    {
-        $this->showPoint = true;
-
-        return $this;
-    }
-
-    public function showText(): self
-    {
-        $this->showText = true;
-
-        return $this;
     }
 
     // Utilities
@@ -182,7 +95,9 @@ class Series
 
         return match ($this->pointShape) {
             PointType::Square => $position - $this->pointSize,
-            PointType::Text => $axis === 'y' ? $position - Chart::CHARACTER_HEIGHT / 4 : $position,
+            PointType::Text => $axis === 'y'
+                ? $position - Chart::CHARACTER_HEIGHT / 4
+                : $position,
             default => $position,
         };
     }

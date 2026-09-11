@@ -30,6 +30,7 @@ abstract class Chart extends Component
 
     public array $palette;
 
+    /** @var Series[] */
     public array $series = [];
 
     public VerticalAxis $verticalAxis;
@@ -47,7 +48,7 @@ abstract class Chart extends Component
         public int $width = 630,
         public int $height = 340,
         ?string $id = null,
-        ?string $verticalAxisUnit = null,
+        string $verticalAxisUnit = '',
         ?int $verticalAxisMax = null,
         ?int $verticalAxisMin = null,
         string|Palette $palette = Palette::Default,
@@ -84,15 +85,17 @@ abstract class Chart extends Component
     // Component
     public function render(): View
     {
-        return view('components.charts.'.$this->chartType());
-    }
-
-    // Setters
-    public function setPalette(Palette $palette): self
-    {
-        $this->palette = Palette::get($palette);
-
-        return $this;
+        return view('laravel-graph::' . $this->chartType(), [
+            'caption' => $this->caption,
+            'description' => $this->description,
+            'height' => $this->height,
+            'horizontalAxis' => $this->horizontalAxis,
+            'id' => $this->id,
+            'legend' => $this->legend,
+            'series' => $this->series,
+            'verticalAxis' => $this->verticalAxis,
+            'width' => $this->width,
+        ]);
     }
 
     // Utilities
