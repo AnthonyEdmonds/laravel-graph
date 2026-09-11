@@ -1,5 +1,13 @@
 # Laravel Graph
 
+![Composer status](.github/composer.svg)
+![Coverage status](.github/coverage.svg)
+![Frontend version](.github/frontend.svg)
+![Laravel version](.github/laravel.svg)
+![NPM status](.github/npm.svg)
+![PHP version](.github/php.svg)
+![Tests status](.github/tests.svg)
+
 Add ARIA-accessible graphs to Laravel systems.
 
 Each graph is fully described, keyboard navigable, screen-reader accessible, and provides an alternative HTML table.
