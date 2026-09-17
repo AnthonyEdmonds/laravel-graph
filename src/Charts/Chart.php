@@ -9,7 +9,6 @@ use AnthonyEdmonds\LaravelGraph\Legend\Legend;
 use AnthonyEdmonds\LaravelGraph\Series\Series;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 abstract class Chart extends Component
@@ -123,7 +122,7 @@ abstract class Chart extends Component
         foreach ($verticalAxisKeys as $key) {
             $this->series[] = new Series(
                 $this,
-                Str::headline($key),
+                $key,
                 $key,
                 $this->data,
                 $this->palette[$paletteIndex],

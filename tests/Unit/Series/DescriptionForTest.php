@@ -24,7 +24,7 @@ class DescriptionForTest extends TestCase
     public function test(): void
     {
         $this->assertEquals(
-            '09:00: Cpu, 10%',
+            '09:00: cpu, 10%',
             $this->series->descriptionFor(0, 10),
         );
     }
