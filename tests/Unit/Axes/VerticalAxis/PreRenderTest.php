@@ -4,7 +4,6 @@ namespace AnthonyEdmonds\LaravelGraph\Tests\Unit\Axes\VerticalAxis;
 
 use AnthonyEdmonds\LaravelGraph\Axes\VerticalAxis;
 use AnthonyEdmonds\LaravelGraph\Tests\TestCase;
-use Illuminate\Support\Collection;
 
 class PreRenderTest extends TestCase
 {
