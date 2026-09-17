@@ -20,7 +20,7 @@ class ConstructTest extends TestCase
     {
         $this->assertEquals(
             [
-                'Cpu',
+                'cpu',
             ],
             $this->legend->labels,
         );
