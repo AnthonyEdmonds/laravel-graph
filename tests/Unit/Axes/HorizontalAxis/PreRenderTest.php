@@ -4,6 +4,7 @@ namespace AnthonyEdmonds\LaravelGraph\Tests\Unit\Axes\HorizontalAxis;
 
 use AnthonyEdmonds\LaravelGraph\Axes\HorizontalAxis;
 use AnthonyEdmonds\LaravelGraph\Tests\TestCase;
+use Illuminate\Support\Collection;
 
 class PreRenderTest extends TestCase
 {
@@ -16,12 +17,12 @@ class PreRenderTest extends TestCase
         $this->axis = $this->makeChart()->horizontalAxis;
         $this->axis->chart->verticalAxis->width = 10;
         $this->axis->chart->legend->width = 20;
-
-        $this->axis->preRender();
     }
 
     public function test(): void
     {
+        $this->axis->preRender();
+
         $this->assertEquals(
             10,
             $this->axis->paddingLeft,
@@ -43,6 +44,17 @@ class PreRenderTest extends TestCase
 
         $this->assertEquals(
             120,
+            $this->axis->spacing,
+        );
+    }
+
+    public function testHandlesDivZero(): void
+    {
+        $this->axis->chart->data = new Collection();
+        $this->axis->preRender();
+
+        $this->assertEquals(
+            1,
             $this->axis->spacing,
         );
     }

@@ -70,7 +70,12 @@ class VerticalAxis extends Axis
 
     public function positionFor(int $index): int
     {
-        $verticalSpacing = $this->height / $this->range;
+        try {
+            $verticalSpacing = $this->height / $this->range;
+        } catch (DivisionByZeroError $exception) {
+            $verticalSpacing = 0;
+        }
+
         $difference = $this->max - $index;
 
         return $verticalSpacing * $difference;

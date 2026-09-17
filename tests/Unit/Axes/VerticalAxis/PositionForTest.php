@@ -26,4 +26,14 @@ class PositionForTest extends TestCase
             $this->axis->positionFor(3),
         );
     }
+
+    public function testHandlesDivZero(): void
+    {
+        $this->axis->range = 0;
+
+        $this->assertEquals(
+            0,
+            $this->axis->positionFor(3),
+        );
+    }
 }
