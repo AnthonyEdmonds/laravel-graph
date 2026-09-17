@@ -30,4 +30,17 @@ class GetLabelsTest extends TestCase
             $this->axis->getLabels(),
         );
     }
+
+    public function testNoGap(): void
+    {
+        $this->axis->max = 0;
+        $this->axis->min = 0;
+
+        $this->assertEquals(
+            [
+                0 => 0,
+            ],
+            $this->axis->getLabels(),
+        );
+    }
 }

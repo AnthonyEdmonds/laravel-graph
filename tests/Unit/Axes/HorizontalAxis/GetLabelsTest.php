@@ -4,6 +4,7 @@ namespace AnthonyEdmonds\LaravelGraph\Tests\Unit\Axes\HorizontalAxis;
 
 use AnthonyEdmonds\LaravelGraph\Axes\HorizontalAxis;
 use AnthonyEdmonds\LaravelGraph\Tests\TestCase;
+use Illuminate\Support\Collection;
 
 class GetLabelsTest extends TestCase
 {
@@ -44,6 +45,16 @@ class GetLabelsTest extends TestCase
                 '',
                 '13:00',
             ],
+            $this->axis->getLabels(),
+        );
+    }
+
+    public function testWhenBlank(): void
+    {
+        $this->axis->chart->data = new Collection();
+
+        $this->assertEquals(
+            [],
             $this->axis->getLabels(),
         );
     }
