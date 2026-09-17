@@ -123,7 +123,7 @@ abstract class Chart extends Component
         foreach ($verticalAxisKeys as $key) {
             $this->series[] = new Series(
                 $this,
-                Str::headline($key),
+                $key,
                 $key,
                 $this->data,
                 $this->palette[$paletteIndex],
